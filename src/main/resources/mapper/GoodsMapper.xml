@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neo.mapper.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.neo.entity.Goods" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="hotel_name" property="hotelName" jdbcType="VARCHAR" />
+    <result column="beizhao" property="beizhao" jdbcType="DOUBLE" />
+    <result column="beizhao_num" property="beizhaoNum" jdbcType="BIGINT" />
+    <result column="chuangdan" property="chuangdan" jdbcType="DOUBLE" />
+    <result column="chuangdan_num" property="chuangdanNum" jdbcType="BIGINT" />
+    <result column="chuanglian" property="chuanglian" jdbcType="DOUBLE" />
+    <result column="chuanglian_num" property="chuanglianNum" jdbcType="BIGINT" />
+    <result column="chuangsha" property="chuangsha" jdbcType="DOUBLE" />
+    <result column="chuangsha_num" property="chuangshaNum" jdbcType="BIGINT" />
+    <result column="dijin" property="dijin" jdbcType="DOUBLE" />
+    <result column="dijin_num" property="dijinNum" jdbcType="BIGINT" />
+    <result column="hanzhengfu" property="hanzhengfu" jdbcType="DOUBLE" />
+    <result column="hanzhengfu_num" property="hanzhengfuNum" jdbcType="BIGINT" />
+    <result column="mianjin" property="mianjin" jdbcType="DOUBLE" />
+    <result column="mianjin_num" property="mianjinNum" jdbcType="BIGINT" />
+    <result column="taibu_da" property="taibuDa" jdbcType="DOUBLE" />
+    <result column="taibu_da_num" property="taibuDaNum" jdbcType="BIGINT" />
+    <result column="taibu_xiao" property="taibuXiao" jdbcType="DOUBLE" />
+    <result column="taibu_xiao_num" property="taibuXiaoNum" jdbcType="BIGINT" />
+    <result column="yujin" property="yujin" jdbcType="DOUBLE" />
+    <result column="yujin_num" property="yujinNum" jdbcType="BIGINT" />
+    <result column="yupao" property="yupao" jdbcType="DOUBLE" />
+    <result column="yupao_num" property="yupaoNum" jdbcType="BIGINT" />
+    <result column="zhenjin" property="zhenjin" jdbcType="DOUBLE" />
+    <result column="zhenjin_num" property="zhenjinNum" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, create_time, hotel_name, beizhao, beizhao_num, chuangdan, chuangdan_num, chuanglian, 
+    chuanglian_num, chuangsha, chuangsha_num, dijin, dijin_num, hanzhengfu, hanzhengfu_num, 
+    mianjin, mianjin_num, taibu_da, taibu_da_num, taibu_xiao, taibu_xiao_num, yujin, 
+    yujin_num, yupao, yupao_num, zhenjin, zhenjin_num
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neo.entity.GoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from goods
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neo.entity.GoodsExample" >
+    delete from goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neo.entity.Goods" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goods (create_time, hotel_name, beizhao, 
+      beizhao_num, chuangdan, chuangdan_num, 
+      chuanglian, chuanglian_num, chuangsha, 
+      chuangsha_num, dijin, dijin_num, 
+      hanzhengfu, hanzhengfu_num, mianjin, 
+      mianjin_num, taibu_da, taibu_da_num, 
+      taibu_xiao, taibu_xiao_num, yujin, 
+      yujin_num, yupao, yupao_num, 
+      zhenjin, zhenjin_num)
+    values (#{createTime,jdbcType=BIGINT}, #{hotelName,jdbcType=VARCHAR}, #{beizhao,jdbcType=DOUBLE}, 
+      #{beizhaoNum,jdbcType=BIGINT}, #{chuangdan,jdbcType=DOUBLE}, #{chuangdanNum,jdbcType=BIGINT}, 
+      #{chuanglian,jdbcType=DOUBLE}, #{chuanglianNum,jdbcType=BIGINT}, #{chuangsha,jdbcType=DOUBLE}, 
+      #{chuangshaNum,jdbcType=BIGINT}, #{dijin,jdbcType=DOUBLE}, #{dijinNum,jdbcType=BIGINT}, 
+      #{hanzhengfu,jdbcType=DOUBLE}, #{hanzhengfuNum,jdbcType=BIGINT}, #{mianjin,jdbcType=DOUBLE}, 
+      #{mianjinNum,jdbcType=BIGINT}, #{taibuDa,jdbcType=DOUBLE}, #{taibuDaNum,jdbcType=BIGINT}, 
+      #{taibuXiao,jdbcType=DOUBLE}, #{taibuXiaoNum,jdbcType=BIGINT}, #{yujin,jdbcType=DOUBLE}, 
+      #{yujinNum,jdbcType=BIGINT}, #{yupao,jdbcType=DOUBLE}, #{yupaoNum,jdbcType=BIGINT}, 
+      #{zhenjin,jdbcType=DOUBLE}, #{zhenjinNum,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neo.entity.Goods" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="hotelName != null" >
+        hotel_name,
+      </if>
+      <if test="beizhao != null" >
+        beizhao,
+      </if>
+      <if test="beizhaoNum != null" >
+        beizhao_num,
+      </if>
+      <if test="chuangdan != null" >
+        chuangdan,
+      </if>
+      <if test="chuangdanNum != null" >
+        chuangdan_num,
+      </if>
+      <if test="chuanglian != null" >
+        chuanglian,
+      </if>
+      <if test="chuanglianNum != null" >
+        chuanglian_num,
+      </if>
+      <if test="chuangsha != null" >
+        chuangsha,
+      </if>
+      <if test="chuangshaNum != null" >
+        chuangsha_num,
+      </if>
+      <if test="dijin != null" >
+        dijin,
+      </if>
+      <if test="dijinNum != null" >
+        dijin_num,
+      </if>
+      <if test="hanzhengfu != null" >
+        hanzhengfu,
+      </if>
+      <if test="hanzhengfuNum != null" >
+        hanzhengfu_num,
+      </if>
+      <if test="mianjin != null" >
+        mianjin,
+      </if>
+      <if test="mianjinNum != null" >
+        mianjin_num,
+      </if>
+      <if test="taibuDa != null" >
+        taibu_da,
+      </if>
+      <if test="taibuDaNum != null" >
+        taibu_da_num,
+      </if>
+      <if test="taibuXiao != null" >
+        taibu_xiao,
+      </if>
+      <if test="taibuXiaoNum != null" >
+        taibu_xiao_num,
+      </if>
+      <if test="yujin != null" >
+        yujin,
+      </if>
+      <if test="yujinNum != null" >
+        yujin_num,
+      </if>
+      <if test="yupao != null" >
+        yupao,
+      </if>
+      <if test="yupaoNum != null" >
+        yupao_num,
+      </if>
+      <if test="zhenjin != null" >
+        zhenjin,
+      </if>
+      <if test="zhenjinNum != null" >
+        zhenjin_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="hotelName != null" >
+        #{hotelName,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhao != null" >
+        #{beizhao,jdbcType=DOUBLE},
+      </if>
+      <if test="beizhaoNum != null" >
+        #{beizhaoNum,jdbcType=BIGINT},
+      </if>
+      <if test="chuangdan != null" >
+        #{chuangdan,jdbcType=DOUBLE},
+      </if>
+      <if test="chuangdanNum != null" >
+        #{chuangdanNum,jdbcType=BIGINT},
+      </if>
+      <if test="chuanglian != null" >
+        #{chuanglian,jdbcType=DOUBLE},
+      </if>
+      <if test="chuanglianNum != null" >
+        #{chuanglianNum,jdbcType=BIGINT},
+      </if>
+      <if test="chuangsha != null" >
+        #{chuangsha,jdbcType=DOUBLE},
+      </if>
+      <if test="chuangshaNum != null" >
+        #{chuangshaNum,jdbcType=BIGINT},
+      </if>
+      <if test="dijin != null" >
+        #{dijin,jdbcType=DOUBLE},
+      </if>
+      <if test="dijinNum != null" >
+        #{dijinNum,jdbcType=BIGINT},
+      </if>
+      <if test="hanzhengfu != null" >
+        #{hanzhengfu,jdbcType=DOUBLE},
+      </if>
+      <if test="hanzhengfuNum != null" >
+        #{hanzhengfuNum,jdbcType=BIGINT},
+      </if>
+      <if test="mianjin != null" >
+        #{mianjin,jdbcType=DOUBLE},
+      </if>
+      <if test="mianjinNum != null" >
+        #{mianjinNum,jdbcType=BIGINT},
+      </if>
+      <if test="taibuDa != null" >
+        #{taibuDa,jdbcType=DOUBLE},
+      </if>
+      <if test="taibuDaNum != null" >
+        #{taibuDaNum,jdbcType=BIGINT},
+      </if>
+      <if test="taibuXiao != null" >
+        #{taibuXiao,jdbcType=DOUBLE},
+      </if>
+      <if test="taibuXiaoNum != null" >
+        #{taibuXiaoNum,jdbcType=BIGINT},
+      </if>
+      <if test="yujin != null" >
+        #{yujin,jdbcType=DOUBLE},
+      </if>
+      <if test="yujinNum != null" >
+        #{yujinNum,jdbcType=BIGINT},
+      </if>
+      <if test="yupao != null" >
+        #{yupao,jdbcType=DOUBLE},
+      </if>
+      <if test="yupaoNum != null" >
+        #{yupaoNum,jdbcType=BIGINT},
+      </if>
+      <if test="zhenjin != null" >
+        #{zhenjin,jdbcType=DOUBLE},
+      </if>
+      <if test="zhenjinNum != null" >
+        #{zhenjinNum,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neo.entity.GoodsExample" resultType="java.lang.Integer" >
+    select count(*) from goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update goods
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.hotelName != null" >
+        hotel_name = #{record.hotelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beizhao != null" >
+        beizhao = #{record.beizhao,jdbcType=DOUBLE},
+      </if>
+      <if test="record.beizhaoNum != null" >
+        beizhao_num = #{record.beizhaoNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.chuangdan != null" >
+        chuangdan = #{record.chuangdan,jdbcType=DOUBLE},
+      </if>
+      <if test="record.chuangdanNum != null" >
+        chuangdan_num = #{record.chuangdanNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.chuanglian != null" >
+        chuanglian = #{record.chuanglian,jdbcType=DOUBLE},
+      </if>
+      <if test="record.chuanglianNum != null" >
+        chuanglian_num = #{record.chuanglianNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.chuangsha != null" >
+        chuangsha = #{record.chuangsha,jdbcType=DOUBLE},
+      </if>
+      <if test="record.chuangshaNum != null" >
+        chuangsha_num = #{record.chuangshaNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.dijin != null" >
+        dijin = #{record.dijin,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dijinNum != null" >
+        dijin_num = #{record.dijinNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.hanzhengfu != null" >
+        hanzhengfu = #{record.hanzhengfu,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hanzhengfuNum != null" >
+        hanzhengfu_num = #{record.hanzhengfuNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.mianjin != null" >
+        mianjin = #{record.mianjin,jdbcType=DOUBLE},
+      </if>
+      <if test="record.mianjinNum != null" >
+        mianjin_num = #{record.mianjinNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.taibuDa != null" >
+        taibu_da = #{record.taibuDa,jdbcType=DOUBLE},
+      </if>
+      <if test="record.taibuDaNum != null" >
+        taibu_da_num = #{record.taibuDaNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.taibuXiao != null" >
+        taibu_xiao = #{record.taibuXiao,jdbcType=DOUBLE},
+      </if>
+      <if test="record.taibuXiaoNum != null" >
+        taibu_xiao_num = #{record.taibuXiaoNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.yujin != null" >
+        yujin = #{record.yujin,jdbcType=DOUBLE},
+      </if>
+      <if test="record.yujinNum != null" >
+        yujin_num = #{record.yujinNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.yupao != null" >
+        yupao = #{record.yupao,jdbcType=DOUBLE},
+      </if>
+      <if test="record.yupaoNum != null" >
+        yupao_num = #{record.yupaoNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.zhenjin != null" >
+        zhenjin = #{record.zhenjin,jdbcType=DOUBLE},
+      </if>
+      <if test="record.zhenjinNum != null" >
+        zhenjin_num = #{record.zhenjinNum,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update goods
+    set id = #{record.id,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      hotel_name = #{record.hotelName,jdbcType=VARCHAR},
+      beizhao = #{record.beizhao,jdbcType=DOUBLE},
+      beizhao_num = #{record.beizhaoNum,jdbcType=BIGINT},
+      chuangdan = #{record.chuangdan,jdbcType=DOUBLE},
+      chuangdan_num = #{record.chuangdanNum,jdbcType=BIGINT},
+      chuanglian = #{record.chuanglian,jdbcType=DOUBLE},
+      chuanglian_num = #{record.chuanglianNum,jdbcType=BIGINT},
+      chuangsha = #{record.chuangsha,jdbcType=DOUBLE},
+      chuangsha_num = #{record.chuangshaNum,jdbcType=BIGINT},
+      dijin = #{record.dijin,jdbcType=DOUBLE},
+      dijin_num = #{record.dijinNum,jdbcType=BIGINT},
+      hanzhengfu = #{record.hanzhengfu,jdbcType=DOUBLE},
+      hanzhengfu_num = #{record.hanzhengfuNum,jdbcType=BIGINT},
+      mianjin = #{record.mianjin,jdbcType=DOUBLE},
+      mianjin_num = #{record.mianjinNum,jdbcType=BIGINT},
+      taibu_da = #{record.taibuDa,jdbcType=DOUBLE},
+      taibu_da_num = #{record.taibuDaNum,jdbcType=BIGINT},
+      taibu_xiao = #{record.taibuXiao,jdbcType=DOUBLE},
+      taibu_xiao_num = #{record.taibuXiaoNum,jdbcType=BIGINT},
+      yujin = #{record.yujin,jdbcType=DOUBLE},
+      yujin_num = #{record.yujinNum,jdbcType=BIGINT},
+      yupao = #{record.yupao,jdbcType=DOUBLE},
+      yupao_num = #{record.yupaoNum,jdbcType=BIGINT},
+      zhenjin = #{record.zhenjin,jdbcType=DOUBLE},
+      zhenjin_num = #{record.zhenjinNum,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neo.entity.Goods" >
+    update goods
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="hotelName != null" >
+        hotel_name = #{hotelName,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhao != null" >
+        beizhao = #{beizhao,jdbcType=DOUBLE},
+      </if>
+      <if test="beizhaoNum != null" >
+        beizhao_num = #{beizhaoNum,jdbcType=BIGINT},
+      </if>
+      <if test="chuangdan != null" >
+        chuangdan = #{chuangdan,jdbcType=DOUBLE},
+      </if>
+      <if test="chuangdanNum != null" >
+        chuangdan_num = #{chuangdanNum,jdbcType=BIGINT},
+      </if>
+      <if test="chuanglian != null" >
+        chuanglian = #{chuanglian,jdbcType=DOUBLE},
+      </if>
+      <if test="chuanglianNum != null" >
+        chuanglian_num = #{chuanglianNum,jdbcType=BIGINT},
+      </if>
+      <if test="chuangsha != null" >
+        chuangsha = #{chuangsha,jdbcType=DOUBLE},
+      </if>
+      <if test="chuangshaNum != null" >
+        chuangsha_num = #{chuangshaNum,jdbcType=BIGINT},
+      </if>
+      <if test="dijin != null" >
+        dijin = #{dijin,jdbcType=DOUBLE},
+      </if>
+      <if test="dijinNum != null" >
+        dijin_num = #{dijinNum,jdbcType=BIGINT},
+      </if>
+      <if test="hanzhengfu != null" >
+        hanzhengfu = #{hanzhengfu,jdbcType=DOUBLE},
+      </if>
+      <if test="hanzhengfuNum != null" >
+        hanzhengfu_num = #{hanzhengfuNum,jdbcType=BIGINT},
+      </if>
+      <if test="mianjin != null" >
+        mianjin = #{mianjin,jdbcType=DOUBLE},
+      </if>
+      <if test="mianjinNum != null" >
+        mianjin_num = #{mianjinNum,jdbcType=BIGINT},
+      </if>
+      <if test="taibuDa != null" >
+        taibu_da = #{taibuDa,jdbcType=DOUBLE},
+      </if>
+      <if test="taibuDaNum != null" >
+        taibu_da_num = #{taibuDaNum,jdbcType=BIGINT},
+      </if>
+      <if test="taibuXiao != null" >
+        taibu_xiao = #{taibuXiao,jdbcType=DOUBLE},
+      </if>
+      <if test="taibuXiaoNum != null" >
+        taibu_xiao_num = #{taibuXiaoNum,jdbcType=BIGINT},
+      </if>
+      <if test="yujin != null" >
+        yujin = #{yujin,jdbcType=DOUBLE},
+      </if>
+      <if test="yujinNum != null" >
+        yujin_num = #{yujinNum,jdbcType=BIGINT},
+      </if>
+      <if test="yupao != null" >
+        yupao = #{yupao,jdbcType=DOUBLE},
+      </if>
+      <if test="yupaoNum != null" >
+        yupao_num = #{yupaoNum,jdbcType=BIGINT},
+      </if>
+      <if test="zhenjin != null" >
+        zhenjin = #{zhenjin,jdbcType=DOUBLE},
+      </if>
+      <if test="zhenjinNum != null" >
+        zhenjin_num = #{zhenjinNum,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neo.entity.Goods" >
+    update goods
+    set create_time = #{createTime,jdbcType=BIGINT},
+      hotel_name = #{hotelName,jdbcType=VARCHAR},
+      beizhao = #{beizhao,jdbcType=DOUBLE},
+      beizhao_num = #{beizhaoNum,jdbcType=BIGINT},
+      chuangdan = #{chuangdan,jdbcType=DOUBLE},
+      chuangdan_num = #{chuangdanNum,jdbcType=BIGINT},
+      chuanglian = #{chuanglian,jdbcType=DOUBLE},
+      chuanglian_num = #{chuanglianNum,jdbcType=BIGINT},
+      chuangsha = #{chuangsha,jdbcType=DOUBLE},
+      chuangsha_num = #{chuangshaNum,jdbcType=BIGINT},
+      dijin = #{dijin,jdbcType=DOUBLE},
+      dijin_num = #{dijinNum,jdbcType=BIGINT},
+      hanzhengfu = #{hanzhengfu,jdbcType=DOUBLE},
+      hanzhengfu_num = #{hanzhengfuNum,jdbcType=BIGINT},
+      mianjin = #{mianjin,jdbcType=DOUBLE},
+      mianjin_num = #{mianjinNum,jdbcType=BIGINT},
+      taibu_da = #{taibuDa,jdbcType=DOUBLE},
+      taibu_da_num = #{taibuDaNum,jdbcType=BIGINT},
+      taibu_xiao = #{taibuXiao,jdbcType=DOUBLE},
+      taibu_xiao_num = #{taibuXiaoNum,jdbcType=BIGINT},
+      yujin = #{yujin,jdbcType=DOUBLE},
+      yujin_num = #{yujinNum,jdbcType=BIGINT},
+      yupao = #{yupao,jdbcType=DOUBLE},
+      yupao_num = #{yupaoNum,jdbcType=BIGINT},
+      zhenjin = #{zhenjin,jdbcType=DOUBLE},
+      zhenjin_num = #{zhenjinNum,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

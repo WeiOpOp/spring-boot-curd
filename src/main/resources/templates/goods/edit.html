@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  	<title></title>
+  	<meta charset="UTF-8"/>
+    <#import "app.ftl" as m>
+	<@m.head/>
+  </head>
+  <body>
+  		<form id="addForm">
+  			<!-- 表单数据 -->
+  			<input type="hidden" name="id" value="${goods.id}" >
+  			<div class="form-group">
+			    <label class="col-sm-2 control-label">宾馆名称：</label>
+			    <div class="col-sm-10">
+				  <input type="text" name="hotelName" value="${goods.hotelName!0}" class="form-control" placeholder="" value="0">
+				  <span class="help-block"></span>
+				</div>
+			</div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">床单价格：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="chuangdan" value="${goods.chuangdan!0}" class="form-control" placeholder="" value="0">
+					<span class="help-block"></span>
+				</div>
+			    <label class="col-sm-2 control-label">个数：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="chuangdanNum" value="${goods.chuangdanNum!0}" class="form-control" placeholder="" value="0">
+				  	<span class="help-block"></span>
+				</div>
+			</div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">被罩价格：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="beizhao" value="${goods.beizhao!0}" class="form-control" placeholder="" value="0">
+					<span class="help-block"></span>
+				</div>
+			    <label class="col-sm-2 control-label">个数：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="beizhaoNum" value="${goods.beizhaoNum!0}" class="form-control" placeholder="" value="0">
+				  	<span class="help-block"></span>
+				</div>
+			</div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">枕巾价格：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="zhenjin" value="${goods.zhenjin!0}" class="form-control" placeholder="" value="0">
+					<span class="help-block"></span>
+				</div>
+			    <label class="col-sm-2 control-label">个数：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="zhenjinNum" value="${goods.zhenjinNum!0}" class="form-control" placeholder="" value="0">
+				  	<span class="help-block"></span>
+				</div>
+			</div>
+			
+			<div class="form-group">
+			   <label class="col-sm-2 control-label">浴巾价格：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="yujin" value="${goods.yujin!0}" class="form-control" placeholder="" value="0">
+					<span class="help-block"></span>
+				</div>
+			    <label class="col-sm-2 control-label">个数：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="yujinNum" value="${goods.yujinNum!0}" class="form-control" placeholder="" value="0">
+				  	<span class="help-block"></span>
+				</div>
+			</div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">面巾价格：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="mianjin" value="${goods.mianjin!0}" class="form-control" placeholder="" value="0">
+					<span class="help-block"></span>
+				</div>
+			    <label class="col-sm-2 control-label">个数：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="mianjinNum" value="${goods.mianjinNum!0}" class="form-control" placeholder="" value="0">
+				  	<span class="help-block"></span>
+				</div>
+			</div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">浴袍价格：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="yupao" value="${goods.yupao!0}" class="form-control" placeholder="" value="0">
+					<span class="help-block"></span>
+				</div>
+			    <label class="col-sm-2 control-label">个数：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="yupaoNum" value="${goods.yupaoNum!0}" class="form-control" placeholder="" value="0">
+				  	<span class="help-block"></span>
+				</div>
+			</div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">窗帘价格：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="chuanglian" value="${goods.chuanglian!0}" class="form-control" placeholder="" value="0">
+					<span class="help-block"></span>
+				</div>
+			    <label class="col-sm-2 control-label">个数：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="chuanglianNum" value="${goods.chuanglianNum!0}" class="form-control" placeholder="" value="0">
+				  	<span class="help-block"></span>
+				</div>
+			</div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">窗纱价格：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="chuangsha" value="${goods.chuangsha!0}" class="form-control" placeholder="" value="0">
+					<span class="help-block"></span>
+				</div>
+			    <label class="col-sm-2 control-label">个数：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="chuangshaNum" value="${goods.chuangshaNum!0}" class="form-control" placeholder="" value="0">
+				  	<span class="help-block"></span>
+				</div>
+			</div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">汗蒸服价格：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="hanzhengfu" value="${goods.hanzhengfu!0}" class="form-control" placeholder="" value="0">
+					<span class="help-block"></span>
+				</div>
+			    <label class="col-sm-2 control-label">个数：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="hanzhengfuNum"  value="${goods.hanzhengfuNum!0}" class="form-control" placeholder="" value="0">
+				  	<span class="help-block"></span>
+				</div>
+			</div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">大台布价格：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="taibuDa" value="${goods.taibuDa!0}" class="form-control" placeholder="" value="0">
+					<span class="help-block"></span>
+				</div>
+			    <label class="col-sm-2 control-label">个数：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="taibuDaNum" value="${goods.taibuDaNum!0}" class="form-control" placeholder="" value="0">
+				  	<span class="help-block"></span>
+				</div>
+			</div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">小台布价格：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="taibuXiao" value="${goods.taibuXiao!0}" class="form-control" placeholder="" value="0">
+					<span class="help-block"></span>
+				</div>
+			    <label class="col-sm-2 control-label">个数：</label>
+			    <div class="col-sm-4">
+					<input type="text" name="taibuXiaoNum" value="${goods.taibuXiaoNum!0}" class="form-control" placeholder="" value="0">
+				  	<span class="help-block"></span>
+				</div>
+			</div>
+			<!-- 按钮 -->
+			<div class="modal-footer">
+		        <button type="button" class="btn btn-danger" id="close_btn">
+		        	<span class="glyphicon glyphicon-remove"></span> 关闭
+		        </button>
+		        <button type="button" class="btn btn-primary" id="save_btn">
+		        	<span class="glyphicon glyphicon glyphicon-ok"></span>保存
+		        </button>
+		    </div>
+  	</form>
+  	<script type="text/javascript">
+		$("#close_btn").click(function(){
+			doClose();
+		});
+		
+		$("#save_btn").click(function(){
+			//2、发送ajax请求保存员工
+			$.ajax({
+				url:"/update",
+				type:"POST",
+				async: false,
+				data:$("#addForm").serialize(),
+				success:function(result){
+					window.parent.refreshPage();
+					doClose();
+				}
+			});
+		});
+	</script>
+  </body>
+</html>
