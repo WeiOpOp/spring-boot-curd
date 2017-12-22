@@ -584,3 +584,52 @@
 2017-12-22 11:05:52,596 DEBUG (BaseJdbcLogger.java:145)- ==>  Preparing: select id, create_time, hotel_name, beizhao, beizhao_num, chuangdan, chuangdan_num, chuanglian, chuanglian_num, chuangsha, chuangsha_num, dijin, dijin_num, hanzhengfu, hanzhengfu_num, mianjin, mianjin_num, taibu_da, taibu_da_num, taibu_xiao, taibu_xiao_num, yujin, yujin_num, yupao, yupao_num, zhenjin, zhenjin_num from goods limit ?,? 
 2017-12-22 11:05:52,597 DEBUG (BaseJdbcLogger.java:145)- ==> Parameters: 10(Integer), 10(Integer)
 2017-12-22 11:05:52,600 DEBUG (BaseJdbcLogger.java:145)- <==      Total: 10
+2017-12-22 11:22:13,636 INFO (StartupInfoLogger.java:48)- Starting Application on FETI-20150827UQ with PID 5448 (E:\mygithub\spring-boot-curd\target\classes started by Administrator in E:\mygithub\spring-boot-curd)
+2017-12-22 11:22:13,637 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.6.RELEASE, Spring v4.3.10.RELEASE
+2017-12-22 11:22:13,638 INFO (SpringApplication.java:593)- No active profile set, falling back to default profiles: default
+2017-12-22 11:22:26,223 INFO (StartupInfoLogger.java:57)- Started Application in 13.246 seconds (JVM running for 14.366)
+2017-12-22 12:32:16,858 INFO (StartupInfoLogger.java:48)- Starting Application on FETI-20150827UQ with PID 5252 (E:\mygithub\spring-boot-curd\target\classes started by Administrator in E:\mygithub\spring-boot-curd)
+2017-12-22 12:32:16,859 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.6.RELEASE, Spring v4.3.10.RELEASE
+2017-12-22 12:32:16,861 INFO (SpringApplication.java:593)- No active profile set, falling back to default profiles: default
+2017-12-22 12:32:29,305 INFO (StartupInfoLogger.java:57)- Started Application in 13.038 seconds (JVM running for 14.028)
+2017-12-22 12:50:11,610 INFO (StartupInfoLogger.java:48)- Starting Application on FETI-20150827UQ with PID 6176 (E:\mygithub\spring-boot-curd\target\classes started by Administrator in E:\mygithub\spring-boot-curd)
+2017-12-22 12:50:11,610 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.6.RELEASE, Spring v4.3.10.RELEASE
+2017-12-22 12:50:11,611 INFO (SpringApplication.java:593)- No active profile set, falling back to default profiles: default
+2017-12-22 12:50:22,408 INFO (StartupInfoLogger.java:57)- Started Application in 11.411 seconds (JVM running for 12.511)
+2017-12-22 12:50:37,978 INFO (GoodsController.java:32)- list...
+2017-12-22 12:50:38,600 DEBUG (BaseJdbcLogger.java:145)- ==>  Preparing: SELECT count(*) FROM goods 
+2017-12-22 12:50:38,642 DEBUG (BaseJdbcLogger.java:145)- ==> Parameters: 
+2017-12-22 12:50:38,662 DEBUG (BaseJdbcLogger.java:145)- <==      Total: 1
+2017-12-22 12:50:38,665 DEBUG (BaseJdbcLogger.java:145)- ==>  Preparing: select id, create_time, hotel_name, beizhao, beizhao_num, chuangdan, chuangdan_num, chuanglian, chuanglian_num, chuangsha, chuangsha_num, dijin, dijin_num, hanzhengfu, hanzhengfu_num, mianjin, mianjin_num, taibu_da, taibu_da_num, taibu_xiao, taibu_xiao_num, yujin, yujin_num, yupao, yupao_num, zhenjin, zhenjin_num from goods limit ?,? 
+2017-12-22 12:50:38,667 DEBUG (BaseJdbcLogger.java:145)- ==> Parameters: 0(Integer), 10(Integer)
+2017-12-22 12:50:38,679 DEBUG (BaseJdbcLogger.java:145)- <==      Total: 10
+2017-12-22 12:50:41,419 INFO (GoodsController.java:32)- list...
+2017-12-22 12:50:41,424 DEBUG (BaseJdbcLogger.java:145)- ==>  Preparing: SELECT count(*) FROM goods 
+2017-12-22 12:50:41,426 DEBUG (BaseJdbcLogger.java:145)- ==> Parameters: 
+2017-12-22 12:50:41,439 DEBUG (BaseJdbcLogger.java:145)- <==      Total: 1
+2017-12-22 12:50:41,440 DEBUG (BaseJdbcLogger.java:145)- ==>  Preparing: select id, create_time, hotel_name, beizhao, beizhao_num, chuangdan, chuangdan_num, chuanglian, chuanglian_num, chuangsha, chuangsha_num, dijin, dijin_num, hanzhengfu, hanzhengfu_num, mianjin, mianjin_num, taibu_da, taibu_da_num, taibu_xiao, taibu_xiao_num, yujin, yujin_num, yupao, yupao_num, zhenjin, zhenjin_num from goods limit ?,? 
+2017-12-22 12:50:41,441 DEBUG (BaseJdbcLogger.java:145)- ==> Parameters: 10(Integer), 10(Integer)
+2017-12-22 12:50:41,480 DEBUG (BaseJdbcLogger.java:145)- <==      Total: 10
+2017-12-22 12:50:48,075 DEBUG (BaseJdbcLogger.java:145)- ==>  Preparing: delete from goods WHERE ( id in ( ? , ? ) ) 
+2017-12-22 12:50:48,076 DEBUG (BaseJdbcLogger.java:145)- ==> Parameters: 169(Long), 170(Long)
+2017-12-22 12:50:48,083 DEBUG (BaseJdbcLogger.java:145)- <==    Updates: 2
+2017-12-22 12:50:48,238 INFO (GoodsController.java:32)- list...
+2017-12-22 12:50:48,239 DEBUG (BaseJdbcLogger.java:145)- ==>  Preparing: SELECT count(*) FROM goods 
+2017-12-22 12:50:48,240 DEBUG (BaseJdbcLogger.java:145)- ==> Parameters: 
+2017-12-22 12:50:48,247 DEBUG (BaseJdbcLogger.java:145)- <==      Total: 1
+2017-12-22 12:50:48,249 DEBUG (BaseJdbcLogger.java:145)- ==>  Preparing: select id, create_time, hotel_name, beizhao, beizhao_num, chuangdan, chuangdan_num, chuanglian, chuanglian_num, chuangsha, chuangsha_num, dijin, dijin_num, hanzhengfu, hanzhengfu_num, mianjin, mianjin_num, taibu_da, taibu_da_num, taibu_xiao, taibu_xiao_num, yujin, yujin_num, yupao, yupao_num, zhenjin, zhenjin_num from goods limit ?,? 
+2017-12-22 12:50:48,254 DEBUG (BaseJdbcLogger.java:145)- ==> Parameters: 10(Integer), 10(Integer)
+2017-12-22 12:50:48,264 DEBUG (BaseJdbcLogger.java:145)- <==      Total: 8
+2017-12-22 12:50:52,882 DEBUG (BaseJdbcLogger.java:145)- ==>  Preparing: insert into goods (create_time, hotel_name, beizhao, beizhao_num, chuangdan, chuangdan_num, chuanglian, chuanglian_num, chuangsha, chuangsha_num, dijin, dijin_num, hanzhengfu, hanzhengfu_num, mianjin, mianjin_num, taibu_da, taibu_da_num, taibu_xiao, taibu_xiao_num, yujin, yujin_num, yupao, yupao_num, zhenjin, zhenjin_num) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+2017-12-22 12:50:52,900 DEBUG (BaseJdbcLogger.java:145)- ==> Parameters: -1(Long), (String), 0.0(Double), 0(Long), 0.0(Double), 0(Long), 0.0(Double), 0(Long), 0.0(Double), 0(Long), null, null, 0.0(Double), 0(Long), 0.0(Double), 0(Long), 0.0(Double), 0(Long), 0.0(Double), 0(Long), 0.0(Double), 0(Long), 0.0(Double), 0(Long), 0.0(Double), 0(Long)
+2017-12-22 12:50:52,948 DEBUG (BaseJdbcLogger.java:145)- <==    Updates: 1
+2017-12-22 12:50:52,949 DEBUG (BaseJdbcLogger.java:145)- ==>  Preparing: SELECT LAST_INSERT_ID() 
+2017-12-22 12:50:52,950 DEBUG (BaseJdbcLogger.java:145)- ==> Parameters: 
+2017-12-22 12:50:52,952 DEBUG (BaseJdbcLogger.java:145)- <==      Total: 1
+2017-12-22 12:50:53,050 INFO (GoodsController.java:32)- list...
+2017-12-22 12:50:53,051 DEBUG (BaseJdbcLogger.java:145)- ==>  Preparing: SELECT count(*) FROM goods 
+2017-12-22 12:50:53,051 DEBUG (BaseJdbcLogger.java:145)- ==> Parameters: 
+2017-12-22 12:50:53,053 DEBUG (BaseJdbcLogger.java:145)- <==      Total: 1
+2017-12-22 12:50:53,077 DEBUG (BaseJdbcLogger.java:145)- ==>  Preparing: select id, create_time, hotel_name, beizhao, beizhao_num, chuangdan, chuangdan_num, chuanglian, chuanglian_num, chuangsha, chuangsha_num, dijin, dijin_num, hanzhengfu, hanzhengfu_num, mianjin, mianjin_num, taibu_da, taibu_da_num, taibu_xiao, taibu_xiao_num, yujin, yujin_num, yupao, yupao_num, zhenjin, zhenjin_num from goods limit ?,? 
+2017-12-22 12:50:53,080 DEBUG (BaseJdbcLogger.java:145)- ==> Parameters: 10(Integer), 10(Integer)
+2017-12-22 12:50:53,097 DEBUG (BaseJdbcLogger.java:145)- <==      Total: 9

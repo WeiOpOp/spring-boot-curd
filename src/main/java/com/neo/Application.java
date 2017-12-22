@@ -4,6 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
+/**
+ * 工程启动类
+ * @author Administrator
+ *
+ */
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
 	
