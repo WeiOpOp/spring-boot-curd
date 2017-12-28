@@ -6,6 +6,8 @@ public class Goods {
     private Long createTime;
 
     private String hotelName;
+    
+    private Double price;
 
     private Double beizhao;
 
@@ -279,6 +281,14 @@ public class Goods {
 
 	public void setCreateTimeStr(String createTimeStr) {
 		this.createTimeStr = createTimeStr;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
     
 }

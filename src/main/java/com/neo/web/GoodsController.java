@@ -3,6 +3,7 @@ package com.neo.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,11 @@ import com.neo.service.GoodsService;
 
 @Controller
 public class GoodsController extends BaseController{
+	
+	public static int pageSize = 10; 
 
+	@Value("${hotel.name.list}")
+	private String hotelNames;
 	@Autowired
     GoodsService goodsService; 
 
@@ -25,19 +30,26 @@ public class GoodsController extends BaseController{
     	logger.info("index...");
         return "redirect:/list";
     }
-
+    
     @RequestMapping("/list")
     public String list(Model model, 
-    		@RequestParam(value = "pn", defaultValue = "1") Integer pn) {
-    	logger.info("list...");
-    	PageHelper.startPage(pn, 10);
-    	List<Goods> goods = goodsService.findAll();
+    		@RequestParam(value = "pn", defaultValue = "1") Integer pn,
+    		@RequestParam(value = "hotelName", defaultValue = "") String hotelName,
+    		@RequestParam(value = "createTime", defaultValue = "") String startTime,
+    		@RequestParam(value = "endTime", defaultValue = "") String endTime) {
+    	logger.info("list..." + hotelName + startTime + endTime);
+    	PageHelper.startPage(pn, pageSize);
+    	List<Goods> goods = goodsService.search(hotelName, startTime, endTime);
     	for(Goods good : goods){
     		good.setCreateTimeStr(TimeUtils.formatIntToDateString(good.getCreateTime()));
     	}
-    	System.out.println(goods.size());
-		PageInfo pageInfo = new PageInfo(goods, 10);
+		PageInfo<Goods> pageInfo = new PageInfo<Goods>(goods, pageSize);
 		model.addAttribute("pageInfo", pageInfo);
+		if(hotelNames != null){
+    		String hotelNameArr[] = hotelNames.split("-");
+    		model.addAttribute("hotelNameArr", hotelNameArr);
+    	}
+		model.addAttribute("createTimeStr", TimeUtils.getCurrentDate(null));
         return "goods/list";
     }
     
@@ -45,15 +57,20 @@ public class GoodsController extends BaseController{
     public String print(Model model, 
     		@RequestParam(value = "pn", defaultValue = "1") Integer pn) {
     	logger.info("list...");
-    	PageHelper.startPage(pn, 10);
+    	PageHelper.startPage(pn, pageSize);
     	List<Goods> goods = goodsService.findAll();
-		PageInfo pageInfo = new PageInfo(goods, 10);
+		PageInfo<Goods> pageInfo = new PageInfo<Goods>(goods, pageSize);
 		model.addAttribute("pageInfo", pageInfo);
         return "goods/print";
     }
     
     @RequestMapping("/toAdd")
     public String toAdd(Model model) {
+    	if(hotelNames != null){
+    		String hotelNameArr[] = hotelNames.split("-");
+    		model.addAttribute("hotelNameArr", hotelNameArr);
+    	}
+    	model.addAttribute("createTimeStr", TimeUtils.getCurrentDate(null));
         return "goods/add";
     }
     
@@ -65,6 +82,7 @@ public class GoodsController extends BaseController{
     @RequestMapping("/toEdit")
     public String toEdit(Model model, Long id) {
     	Goods goods = goodsService.findGoodsById(id);
+    	model.addAttribute("createTimeStr", TimeUtils.formatIntToDateString(goods.getCreateTime()));
         model.addAttribute("goods", goods);
         return "goods/edit";
     }

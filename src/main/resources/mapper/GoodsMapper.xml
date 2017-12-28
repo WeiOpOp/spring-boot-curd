@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="BIGINT" />
     <result column="hotel_name" property="hotelName" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
     <result column="beizhao" property="beizhao" jdbcType="DOUBLE" />
     <result column="beizhao_num" property="beizhaoNum" jdbcType="BIGINT" />
     <result column="chuangdan" property="chuangdan" jdbcType="DOUBLE" />
@@ -89,10 +90,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, create_time, hotel_name, beizhao, beizhao_num, chuangdan, chuangdan_num, chuanglian, 
-    chuanglian_num, chuangsha, chuangsha_num, dijin, dijin_num, hanzhengfu, hanzhengfu_num, 
-    mianjin, mianjin_num, taibu_da, taibu_da_num, taibu_xiao, taibu_xiao_num, yujin, 
-    yujin_num, yupao, yupao_num, zhenjin, zhenjin_num
+    id, create_time, hotel_name, price, beizhao, beizhao_num, chuangdan, chuangdan_num, 
+    chuanglian, chuanglian_num, chuangsha, chuangsha_num, dijin, dijin_num, hanzhengfu, 
+    hanzhengfu_num, mianjin, mianjin_num, taibu_da, taibu_da_num, taibu_xiao, taibu_xiao_num, 
+    yujin, yujin_num, yupao, yupao_num, zhenjin, zhenjin_num
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neo.entity.GoodsExample" >
     select
@@ -107,11 +108,6 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
-  </select>
-  <select id="findAll" resultMap="BaseResultMap" >
-    select 
-    <include refid="Base_Column_List" />
-    from goods
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -133,24 +129,26 @@
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into goods (create_time, hotel_name, beizhao, 
-      beizhao_num, chuangdan, chuangdan_num, 
-      chuanglian, chuanglian_num, chuangsha, 
-      chuangsha_num, dijin, dijin_num, 
-      hanzhengfu, hanzhengfu_num, mianjin, 
-      mianjin_num, taibu_da, taibu_da_num, 
-      taibu_xiao, taibu_xiao_num, yujin, 
-      yujin_num, yupao, yupao_num, 
-      zhenjin, zhenjin_num)
-    values (#{createTime,jdbcType=BIGINT}, #{hotelName,jdbcType=VARCHAR}, #{beizhao,jdbcType=DOUBLE}, 
-      #{beizhaoNum,jdbcType=BIGINT}, #{chuangdan,jdbcType=DOUBLE}, #{chuangdanNum,jdbcType=BIGINT}, 
-      #{chuanglian,jdbcType=DOUBLE}, #{chuanglianNum,jdbcType=BIGINT}, #{chuangsha,jdbcType=DOUBLE}, 
-      #{chuangshaNum,jdbcType=BIGINT}, #{dijin,jdbcType=DOUBLE}, #{dijinNum,jdbcType=BIGINT}, 
-      #{hanzhengfu,jdbcType=DOUBLE}, #{hanzhengfuNum,jdbcType=BIGINT}, #{mianjin,jdbcType=DOUBLE}, 
-      #{mianjinNum,jdbcType=BIGINT}, #{taibuDa,jdbcType=DOUBLE}, #{taibuDaNum,jdbcType=BIGINT}, 
-      #{taibuXiao,jdbcType=DOUBLE}, #{taibuXiaoNum,jdbcType=BIGINT}, #{yujin,jdbcType=DOUBLE}, 
-      #{yujinNum,jdbcType=BIGINT}, #{yupao,jdbcType=DOUBLE}, #{yupaoNum,jdbcType=BIGINT}, 
-      #{zhenjin,jdbcType=DOUBLE}, #{zhenjinNum,jdbcType=BIGINT})
+    insert into goods (create_time, hotel_name, price, 
+      beizhao, beizhao_num, chuangdan, 
+      chuangdan_num, chuanglian, chuanglian_num, 
+      chuangsha, chuangsha_num, dijin, 
+      dijin_num, hanzhengfu, hanzhengfu_num, 
+      mianjin, mianjin_num, taibu_da, 
+      taibu_da_num, taibu_xiao, taibu_xiao_num, 
+      yujin, yujin_num, yupao, 
+      yupao_num, zhenjin, zhenjin_num
+      )
+    values (#{createTime,jdbcType=BIGINT}, #{hotelName,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{beizhao,jdbcType=DOUBLE}, #{beizhaoNum,jdbcType=BIGINT}, #{chuangdan,jdbcType=DOUBLE}, 
+      #{chuangdanNum,jdbcType=BIGINT}, #{chuanglian,jdbcType=DOUBLE}, #{chuanglianNum,jdbcType=BIGINT}, 
+      #{chuangsha,jdbcType=DOUBLE}, #{chuangshaNum,jdbcType=BIGINT}, #{dijin,jdbcType=DOUBLE}, 
+      #{dijinNum,jdbcType=BIGINT}, #{hanzhengfu,jdbcType=DOUBLE}, #{hanzhengfuNum,jdbcType=BIGINT}, 
+      #{mianjin,jdbcType=DOUBLE}, #{mianjinNum,jdbcType=BIGINT}, #{taibuDa,jdbcType=DOUBLE}, 
+      #{taibuDaNum,jdbcType=BIGINT}, #{taibuXiao,jdbcType=DOUBLE}, #{taibuXiaoNum,jdbcType=BIGINT}, 
+      #{yujin,jdbcType=DOUBLE}, #{yujinNum,jdbcType=BIGINT}, #{yupao,jdbcType=DOUBLE}, 
+      #{yupaoNum,jdbcType=BIGINT}, #{zhenjin,jdbcType=DOUBLE}, #{zhenjinNum,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.neo.entity.Goods" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -163,6 +161,9 @@
       </if>
       <if test="hotelName != null" >
         hotel_name,
+      </if>
+      <if test="price != null" >
+        price,
       </if>
       <if test="beizhao != null" >
         beizhao,
@@ -243,6 +244,9 @@
       </if>
       <if test="hotelName != null" >
         #{hotelName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
       </if>
       <if test="beizhao != null" >
         #{beizhao,jdbcType=DOUBLE},
@@ -336,6 +340,9 @@
       <if test="record.hotelName != null" >
         hotel_name = #{record.hotelName,jdbcType=VARCHAR},
       </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
       <if test="record.beizhao != null" >
         beizhao = #{record.beizhao,jdbcType=DOUBLE},
       </if>
@@ -418,6 +425,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       create_time = #{record.createTime,jdbcType=BIGINT},
       hotel_name = #{record.hotelName,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DOUBLE},
       beizhao = #{record.beizhao,jdbcType=DOUBLE},
       beizhao_num = #{record.beizhaoNum,jdbcType=BIGINT},
       chuangdan = #{record.chuangdan,jdbcType=DOUBLE},
@@ -454,6 +462,9 @@
       </if>
       <if test="hotelName != null" >
         hotel_name = #{hotelName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
       </if>
       <if test="beizhao != null" >
         beizhao = #{beizhao,jdbcType=DOUBLE},
@@ -534,6 +545,7 @@
     update goods
     set create_time = #{createTime,jdbcType=BIGINT},
       hotel_name = #{hotelName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
       beizhao = #{beizhao,jdbcType=DOUBLE},
       beizhao_num = #{beizhaoNum,jdbcType=BIGINT},
       chuangdan = #{chuangdan,jdbcType=DOUBLE},

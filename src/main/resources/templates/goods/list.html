@@ -5,6 +5,24 @@
     <meta charset="UTF-8"/>
     <#import "app.ftl" as m>
 	<@m.head/>
+	<style>
+		.bg_1{
+			background-color:#4476A7;
+		}
+		.font1{
+			color:#FFF;
+		}
+		.font2{
+			color:gray;
+		}
+		
+		.table{
+			font-size:12px;
+		}
+		.text_right{
+			text-align: right;
+		}
+	</style>
 </head>
 <body>
 	<form id="QueryForm" name="QueryForm" action="/list" method="post">
@@ -12,38 +30,78 @@
 	<div class="container">
 		<!-- 标题 -->
 		<div class="row">
-			<div class="col-md-12">
-				<h5>宾馆售货情况统计系统 </h5>
+			<div class="col-sm-4">
+				<h4>&nbsp;&nbsp;&nbsp;&nbsp;宾馆售货情况统计系统 </h4>
 			</div>
 		</div>
 		<!-- 按钮 -->
 		<div class="row">
 			<!-- btn-group 按钮组-->
-			<div class="col-md-4 btn-group">
-				<button class="btn btn-primary btn-sm" type="button" id="add_btn">
+			<div class="col-sm-4 btn-group">
+				<button class="btn btn-info btn-sm" type="button" id="add_btn">
 					<span class="glyphicon glyphicon-plus"></span>新增
 				</button>
-				<button class="btn btn-primary btn-sm" type="button" onclick="refreshPage()">
+				<button class="btn btn-info btn-sm" type="button" onclick="refreshPage()">
 					<span class="glyphicon glyphicon-refresh"></span>刷新
 				</button>
-				<button class="btn btn-primary btn-sm" type="button" onclick="print()">
+				<button class="btn btn-info btn-sm" type="button" onclick="print()">
 					<span class="glyphicon glyphicon-print"></span>	打印
+				</button>
+				<button class="btn btn-info btn-sm" type="button" id="showSearch">
+					<span class="glyphicon glyphicon-search"></span> 搜索
 				</button>
 				<button class="btn btn-danger btn-sm" type="button" id="delete_all_btn" onclick="delGoods('all')">
 					<span class="glyphicon glyphicon-trash"></span>	批量删除
 				</button>
 			</div>
 		</div>
+		<!-- 搜索 -->
+		<div class="row" id="searchArea">
+			<div class="form-group input-group-sm">
+			    <label class="col-sm-2 control-label text_right"><small>宾馆名称</small></label>
+			    <div class="col-sm-2">
+					<input type="text" class="form-control" name="hotelName" id="hotelName" placeholder="宾馆名称" value="">
+				</div>
+		   		<label class="col-sm-1 control-label"><small>创建时间大于</small></label>
+				<div class="col-sm-3">
+				   <a class='input-group date' id='datetimepicker1' >
+				        <input type='text' class="form-control" name="createTime" id="createTime" placeholder="创建时间大于" value=""/>
+				        <span class="input-group-addon">
+				            <span class="glyphicon glyphicon-calendar"></span>
+				        </span>
+				    </a>
+				</div>
+				<label class="col-sm-1 control-label"><small>创建时间小于</small></label>
+				<div class="col-sm-3">
+				   <a class='input-group date' id='datetimepicker2' >
+				        <input type='text' class="form-control" name="endTime" id="endTime" placeholder="创建时间小于"value=""/>
+				        <span class="input-group-addon">
+				            <span class="glyphicon glyphicon-calendar"></span>
+				        </span>
+				    </a>
+				</div>
+			</div>	
+			<div class="form-group input-group-sm">
+				<div class="col-sm-5">
+			     </div>
+		        <div class="col-sm-7">
+		        	<button type="button" class="btn btn-info btn-sm" id="search">
+			        	<span class="glyphicon glyphicon-search"></span>查询
+			        </button>
+			     </div>
+			</div>
+		</div>
 		<!-- 显示表格数据 -->
 		<div class="row">
-			<div class="col-lg-12" style="width:1500px">
-				<table class="table table-hover"  style="font-size:12px;" id="emps_table">
+			<div class="col-sm-12">
+				<table class="table table-hover">
 					<thead>
-						<tr>
+						<tr class="bg_1 font1">
 							<th>
 								<input type="checkbox" name="checkedAll" title="全选/反选" onclick="selectAll()" />
 							</th>
-				            <th>宾馆名称</th>
+							<th>#ID</th>
+				            <th style="width:100px">宾馆名称</th>
 				            <th>日期</th>
 				            <th>床单</th>
 				            <th>被罩</th>
@@ -56,33 +114,33 @@
 				            <th>汗蒸服</th>
 				            <th>大台布</th>
 				            <th>小台布</th>
+				            <th>总计</th>
 				            <th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
 					<#if pageInfo.list??>
 		    		<#list pageInfo.list as good>
-			    		<tr>
+			    		<tr class="font2" onclick="editGoods(${good.id?default('')})" title="编辑">
 			    			<td>
 			    				<input type="checkbox" class="check_item" name="check" value="${good.id}"></input>
 			    			</td>
+			    			<td>${good.id?default('')}</td>
 			    			<td>${good.hotelName?default('')}</td>
 			    			<td>${good.createTimeStr?default('')}</td>
-			    			<td>${good.chuangdan!0} * ${good.chuangdanNum!0} = ${good.chuangdan*good.chuangdanNum}</td>
-			    			<td>${good.beizhao!0} * ${good.beizhaoNum!0} = ${good.beizhao*good.beizhaoNum!0}</td>
-			    			<td>${good.zhenjin!0} * ${good.zhenjinNum!0} = ${good.zhenjin*good.zhenjinNum!0}</td>
-			    			<td>${good.yujin!0} * ${good.yujinNum!0} = ${good.yujin*good.yujinNum!0}</td>
-			    			<td>${good.mianjin!0} * ${good.mianjinNum!0} = ${good.mianjin*good.mianjinNum!0}</td>
-			    			<td>${good.yupao!0} * ${good.yupaoNum!0} = ${good.yupao*good.yupaoNum!0}</td>
-			    			<td>${good.chuanglian!0} * ${good.chuanglianNum!0} = ${good.chuanglian*good.chuanglianNum!0}</td>
-			    			<td>${good.chuangsha!0} * ${good.chuangshaNum!0} = ${good.chuangsha*good.chuangshaNum!0}</td>
-			    			<td>${good.hanzhengfu!0} * ${good.hanzhengfuNum!0} = ${good.hanzhengfu*good.hanzhengfuNum!0}</td>
-			    			<td>${good.taibuDa!0} * ${good.taibuDaNum!0} = ${good.taibuDa*good.taibuDaNum!0}</td>
-			    			<td>${good.taibuXiao!0} * ${good.taibuXiaoNum!0} = ${good.taibuXiao*good.taibuXiaoNum!0}</td>
+			    			<td>${good.chuangdanNum!0}</td>
+			    			<td>${good.beizhaoNum!0}</td>
+			    			<td>${good.zhenjinNum!0}</td>
+			    			<td>${good.yujinNum!0}</td>
+			    			<td>${good.mianjinNum!0}</td>
+			    			<td>${good.yupaoNum!0}</td>
+			    			<td>${good.chuanglianNum!0}</td>
+			    			<td>${good.chuangshaNum!0}</td>
+			    			<td>${good.hanzhengfuNum!0}</td>
+			    			<td>${good.taibuDaNum!0}</td>
+			    			<td>${good.taibuXiaoNum!0}</td>
+			    			<td>${good.price!0}￥</td>
 			    			<td>
-			    				<button class="btn btn-primary btn-sm edit_btn btn-xs" type="button" id="edit_btn" onclick="editGoods(${good.id?default('')})">
-			    					<span class="glyphicon glyphicon-pencil"></span> 编辑
-			    				</button>
 			    				<button class="btn btn-danger btn-sm delete_btn btn-xs" type="button" id="del_btn" onclick="delGoods(${good.id?default('')})">
 			    					<span class="glyphicon glyphicon-trash"></span> 删除
 			    				</button>
@@ -145,8 +203,20 @@
 	</div>
     </form>
     <script type="text/javascript">
+    window.onload=function(){
+    	$("#searchArea").hide();
+    }
 	$("#add_btn").click(function(){
 		toAdd();
+	});
+	
+	$("#showSearch").click(function(){
+		$("#searchArea").toggle();
+	});
+	
+	$("#search").click(function(){
+  		window.location.href = "/list?pn="+${pageInfo.pages} + "&hotelName=" + $("#hotelName").val() + 
+  				"&createTime=" + $("#createTime").val() + "&endTime="  + $("#endTime").val();
 	});
 	
 	function editGoods(id){
@@ -154,11 +224,6 @@
   	}
  	//批量删除
   	function delGoods(ids){
-		if(ids == ''){
-			alert('删除id为空！请检查或者联系管理员');
-			return false;
-		}
- 		
   		if(ids == 'all'){
   			var arr = new Array();
   			$("input[type='checkbox'][name='check']:checked").each(
@@ -168,6 +233,10 @@
   			);
   			ids = arr.join("-");
   		}
+  		if(ids == ''){
+  			layer.msg('删除id为空！请检查或者联系管理员。');
+			return false;
+		}
   		//2、发送ajax请求删除员工
   		if(confirm("确认删除【"+ids+"】吗？")){
 	 		$.ajax({
@@ -206,7 +275,7 @@
 		 	skin:"layui-layer-lan",
 		 	shadeClose: false,
 		 	scrollbar: false,		 	
-		 	title: ['修改', 'color:white;'],
+		 	title: ['详情', 'color:white;'],
 		 	area: ['800px', '500px'],
 		 	zIndex:300,
 			//area: ['auto', 'auto'],
@@ -228,10 +297,33 @@
 			e.checked = !e.checked;
 		}
 	}
+  	
 	//打印
   	function print(){
   		window.open("/print?pn="+${pageInfo.pages});
   	}
+	
+  	$('#datetimepicker1').datetimepicker({
+  		language: "zh-CN",
+        format: 'yyyy-mm-dd hh:ii:ss',//显示格式
+        initialDate: new Date(),
+        clearBtn:true,// 自定义属性,true 显示 清空按钮 false 隐藏 默认:true
+        weekStart: 1,
+        todayHighlight: 1,
+        autoclose: true,//选中自动关闭
+        todayBtn: true//显示今日按钮
+   	});
+  	
+  	$('#datetimepicker2').datetimepicker({
+  		language: "zh-CN",
+        format: 'yyyy-mm-dd hh:ii:ss',//显示格式
+        initialDate: new Date(),
+        clearBtn:true,// 自定义属性,true 显示 清空按钮 false 隐藏 默认:true
+        weekStart: 1,
+        todayHighlight: 1,
+        autoclose: true,//选中自动关闭
+        todayBtn: true//显示今日按钮
+  	});
   	</script>
 </body>
 </html>

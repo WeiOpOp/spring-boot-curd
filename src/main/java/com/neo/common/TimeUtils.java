@@ -226,12 +226,15 @@ public class TimeUtils {
 	}
 	
 	/**
-	 * 用于获得指定格式的当前日期 
+	 * 用于获得指定格式的当前日期，  format默认值 yyyy-MM-dd hh:mm:ss
 	 * @param format 字符串时间格式  eg:yyyy-MM-dd hh:mm:ss
 	 * @return String 字符串时间
 	 */
 	public static String getCurrentDate(String format) {
 		String currentDate = "";
+		if(format == null || "".equals(format)){
+			format = "yyyy-MM-dd hh:mm:ss";
+		}
 		try {
 			Calendar calendar = Calendar.getInstance();
 			SimpleDateFormat simpleDateFormat;

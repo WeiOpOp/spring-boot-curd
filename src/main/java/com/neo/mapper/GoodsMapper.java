@@ -9,6 +9,8 @@ import com.neo.entity.GoodsExample;
 @Mapper
 public interface GoodsMapper {
 	List<Goods> findAll();
+	
+	List<Goods> selectByExample(GoodsExample example);
 	 
     int deleteByPrimaryKey(Long id);
 
