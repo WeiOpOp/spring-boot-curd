@@ -109,6 +109,24 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByCount" resultMap="BaseResultMap" parameterType="java.lang.String">
+	SELECT
+		sum(chuangdan) chuangdan,
+		sum(beizhao) beizhao,
+		sum(zhenjin) zhenjin,
+		sum(mianjin) mianjin,
+		sum(dijin) dijin,
+		sum(yupao) yupao,
+		sum(chuanglian) chuanglian,
+		sum(chuangsha) chuangsha,
+		sum(hanzhengfu) hanzhengfu,
+		sum(taibu_da) taibu_da,
+		sum(taibu_xiao)taibu_xiao
+	FROM
+		goods
+	WHERE
+		(hotel_name = #{hotelName,jdbcType=VARCHAR})
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

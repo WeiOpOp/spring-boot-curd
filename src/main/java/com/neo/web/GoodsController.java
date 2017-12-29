@@ -3,7 +3,6 @@ package com.neo.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +19,6 @@ public class GoodsController extends BaseController{
 	
 	public static int pageSize = 10; 
 
-	@Value("${hotel.name.list}")
-	private String hotelNames;
 	@Autowired
     GoodsService goodsService; 
 
@@ -35,9 +32,9 @@ public class GoodsController extends BaseController{
     public String list(Model model, 
     		@RequestParam(value = "pn", defaultValue = "1") Integer pn,
     		@RequestParam(value = "hotelName", defaultValue = "") String hotelName,
-    		@RequestParam(value = "createTime", defaultValue = "") String startTime,
+    		@RequestParam(value = "startTime", defaultValue = "") String startTime,
     		@RequestParam(value = "endTime", defaultValue = "") String endTime) {
-    	logger.info("list..." + hotelName + startTime + endTime);
+    	logger.info("列表：" + hotelName + startTime + endTime);
     	PageHelper.startPage(pn, pageSize);
     	List<Goods> goods = goodsService.search(hotelName, startTime, endTime);
     	for(Goods good : goods){
@@ -45,31 +42,36 @@ public class GoodsController extends BaseController{
     	}
 		PageInfo<Goods> pageInfo = new PageInfo<Goods>(goods, pageSize);
 		model.addAttribute("pageInfo", pageInfo);
-		if(hotelNames != null){
-    		String hotelNameArr[] = hotelNames.split("-");
-    		model.addAttribute("hotelNameArr", hotelNameArr);
-    	}
 		model.addAttribute("createTimeStr", TimeUtils.getCurrentDate(null));
+		model.addAttribute("hotelName",hotelName);
+		model.addAttribute("startTime",startTime);
+		model.addAttribute("endTime",endTime);
         return "goods/list";
     }
     
     @RequestMapping("/print")
     public String print(Model model, 
-    		@RequestParam(value = "pn", defaultValue = "1") Integer pn) {
-    	logger.info("list...");
+    		@RequestParam(value = "pn", defaultValue = "1") Integer pn,
+    		@RequestParam(value = "hotelName", defaultValue = "") String hotelName,
+    		@RequestParam(value = "startTime", defaultValue = "") String startTime,
+    		@RequestParam(value = "endTime", defaultValue = "") String endTime) {
+    	logger.info("打印：" + hotelName + startTime + endTime);
     	PageHelper.startPage(pn, pageSize);
-    	List<Goods> goods = goodsService.findAll();
+    	List<Goods> goods = goodsService.search(hotelName, startTime, endTime);
+    	for(Goods good : goods){
+    		good.setCreateTimeStr(TimeUtils.formatIntToDateString(good.getCreateTime()));
+    	}
 		PageInfo<Goods> pageInfo = new PageInfo<Goods>(goods, pageSize);
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("createTimeStr", TimeUtils.getCurrentDate(null));
+		model.addAttribute("hotelName",hotelName);
+		model.addAttribute("startTime",startTime);
+		model.addAttribute("endTime",endTime);
         return "goods/print";
     }
     
     @RequestMapping("/toAdd")
     public String toAdd(Model model) {
-    	if(hotelNames != null){
-    		String hotelNameArr[] = hotelNames.split("-");
-    		model.addAttribute("hotelNameArr", hotelNameArr);
-    	}
     	model.addAttribute("createTimeStr", TimeUtils.getCurrentDate(null));
         return "goods/add";
     }

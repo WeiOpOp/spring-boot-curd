@@ -62,6 +62,7 @@ public class GoodsRestController extends BaseController{
 				goods.getZhenjin() * goods.getZhenjinNum() + 
 				goods.getYujin() * goods.getYujinNum() +
 				goods.getMianjin() * goods.getMianjinNum() +
+				goods.getDijin() * goods.getDijinNum() +
 				goods.getYupao() * goods.getYupaoNum() +
 				goods.getChuanglian() * goods.getChuanglianNum() + 
 				goods.getChuangsha() * goods.getChuangshaNum() + 

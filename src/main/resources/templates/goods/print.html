@@ -13,22 +13,30 @@
 		<!-- 标题 -->
 		<div class="row">
 			<div class="col-md-12">
-				<h2>宾馆售货情况统计打印页面 </h2>
+				<h2>宾馆售货情况统计打印页面</h2>
+				<h5><strong>宾馆名称：${hotelName}</strong></h5>
 			</div>
 		</div>
-		<!-- 按钮 -->
 		<!-- 显示表格数据 -->
 		<div class="row">
+			<div class="col-md-12">
+				<h5><strong>查询列表</strong></h5>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-lg-12">
-				<table class="table table-hover" id="emps_table">
+				<table class="table table-hover" id="table">
 					<thead>
 						<tr>
+							<th>#</th>
+							<th>时间</th>
 				            <th>宾馆名称</th>
 				            <th>床单</th>
 				            <th>被罩</th>
 				            <th>枕巾</th>
 				            <th>浴巾</th>
 				            <th>面巾</th>
+				            <th>地巾</th>
 				            <th>浴袍</th>
 				            <th>窗帘</th>
 				            <th>窗纱</th>
@@ -39,29 +47,141 @@
 						</tr>
 					</thead>
 					<tbody>
-					<#if pageInfo.list??>
-		    		<#list pageInfo.list as good>
-			    		<tr>
-			    			<td>${good.hotelName?default('')}</td>
-			    			<td>${good.chuangdanNum!0}</td>
-			    			<td>${good.beizhaoNum!0}</td>
-			    			<td>${good.zhenjinNum!0}</td>
-			    			<td>${good.yujinNum!0}</td>
-			    			<td>${good.mianjinNum!0}</td>
-			    			<td>${good.yupaoNum!0}</td>
-			    			<td>${good.chuanglianNum!0}</td>
-			    			<td>${good.chuangshaNum!0}</td>
-			    			<td>${good.hanzhengfuNum!0}</td>
-			    			<td>${good.taibuDaNum!0}</td>
-			    			<td>${good.taibuXiaoNum!0}</td>
-			    			<td>${good.price!0}￥</td>
-			    		</tr>
-		    		</#list>
-		    		</#if>
+						<#if pageInfo.list??>
+			    		<#list pageInfo.list as good>
+				    		<tr>
+				    			<td>${good_index+1}</td>
+				    			<td>${good.createTimeStr?default('')}</td>
+				    			<td>${good.hotelName?default('')}</td>
+				    			
+				    			<td id="chuangdan${good_index+1}">${good.chuangdanNum!0}</td>
+				    			<td id="beizhao${good_index+1}">${good.beizhaoNum!0}</td>
+				    			<td id="zhenjin${good_index+1}">${good.zhenjinNum!0}</td>
+				    			<td id="yujin${good_index+1}">${good.yujinNum!0}</td>
+				    			
+				    			<td id="mianjin${good_index+1}">${good.mianjinNum!0}</td>
+				    			<td id="dijin${good_index+1}">${good.dijinNum!0}</td>
+				    			<td id="yupao${good_index+1}">${good.yupaoNum!0}</td>
+				    			<td id="chuanglian${good_index+1}">${good.chuanglianNum!0}</td>
+				    			
+				    			<td id="chuangsha${good_index+1}">${good.chuangshaNum!0}</td>
+				    			<td id="hanzhengfu${good_index+1}">${good.hanzhengfuNum!0}</td>
+				    			<td id="taibuDa${good_index+1}">${good.taibuDaNum!0}</td>
+				    			<td id="taibuXiao${good_index+1}">${good.taibuXiaoNum!0}</td>
+				    			
+				    			<td id="price${good_index+1}">${good.price!0}</td>
+				    		</tr>
+			    		</#list>
+			    		</#if>
+		    			<tr>
+			    			<td><strong>统计</strong></td>
+			    			<td>&nbsp;</td>
+			    			<td>${hotelName}</td>
+			    			
+			    			<td id="chuangdan"></td>
+			    			<td id="beizhao"></td>
+			    			<td id="zhenjin"></td>
+			    			<td id="yujin"></td>
+			    			
+			    			<td id="mianjin"></td>
+			    			<td id="dijin"></td>
+			    			<td id="yupao"></td>
+			    			<td id="chuanglian"></td>
+			    			
+			    			<td id="chuangsha"></td>
+			    			<td id="hanzhengfu"></td>
+			    			<td id="taibuDa"></td>
+			    			<td id="taibuXiao"></td>
+			    			
+			    			<td id="sum"></td>
+		    			</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	window.onload=function(){
+		var $chuangdan = $("td[id^='chuangdan']");
+		var $beizhao = $("td[id^='beizhao']");
+		var $zhenjin = $("td[id^='zhenjin']");
+		var $yujin = $("td[id^='yujin']");
+		var $mianjin = $("td[id^='mianjin']");
+		var $dijin = $("td[id^='dijin']");
+		var $yupao = $("td[id^='yupao']");
+		var $chuanglian = $("td[id^='chuanglian']");
+		var $chuangsha = $("td[id^='chuangsha']");
+		var $hanzhengfu = $("td[id^='hanzhengfu']");
+		var $dataibu = $("td[id^='taibuDa']");
+		var $xiaotaibu = $("td[id^='taibuXiao']");
+		var sum1 = 0;
+		$chuangdan.each(function() {
+			sum1 += Number($(this).text());
+		});
+		var sum2 = 0;
+		$beizhao.each(function() {
+			sum2 += Number($(this).text());
+		});
+		var sum3 = 0;
+		$zhenjin.each(function() {
+			sum3 += Number($(this).text());
+		});
+		var sum4 = 0;
+		$yujin.each(function() {
+			sum4 += Number($(this).text());
+		});
+		var sum5 = 0;
+		$mianjin.each(function() {
+			sum5 += Number($(this).text());
+		});
+		var sum6 = 0;
+		$dijin.each(function() {
+			sum6 += Number($(this).text());
+		});
+		var sum7 = 0;
+		$yupao.each(function() {
+			sum7 += Number($(this).text());
+		});
+		var sum8 = 0;
+		$chuanglian.each(function() {
+			sum8 += Number($(this).text());
+		});
+		var sum9 = 0;
+		$chuangsha.each(function() {
+			sum9 += Number($(this).text());
+		});
+		var sum10 = 0;
+		$hanzhengfu.each(function() {
+			sum10 += Number($(this).text());
+		});
+		var sum11 = 0;
+		$dataibu.each(function() {
+			sum11 += Number($(this).text());
+		});
+		var sum12 = 0;
+		$xiaotaibu.each(function() {
+			sum12 += Number($(this).text());
+		});
+		$("#chuangdan").html(sum1);
+		$("#beizhao").html(sum2);
+		$("#zhenjin").html(sum3);
+		$("#yujin").html(sum4);
+		$("#mianjin").html(sum5);
+		$("#dijin").html(sum6);
+		$("#yupao").html(sum7);
+		$("#chuanglian").html(sum6);
+		$("#chuangsha").html(sum9);
+		$("#hanzhengfu").html(sum10);
+		$("#taibuDa").html(sum11);
+		$("#taibuXiao").html(sum12);
+		
+		var $price = $("td[id^='price']");
+		var price = 0;
+		$price.each(function() {
+			price += Number($(this).text());
+		});
+		$("#sum").html(price);
+	}
+	</script>
 </body>
 </html>

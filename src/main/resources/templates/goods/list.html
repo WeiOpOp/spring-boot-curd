@@ -44,9 +44,6 @@
 				<button class="btn btn-info btn-sm" type="button" onclick="refreshPage()">
 					<span class="glyphicon glyphicon-refresh"></span>刷新
 				</button>
-				<button class="btn btn-info btn-sm" type="button" onclick="print()">
-					<span class="glyphicon glyphicon-print"></span>	打印
-				</button>
 				<button class="btn btn-info btn-sm" type="button" id="showSearch">
 					<span class="glyphicon glyphicon-search"></span> 搜索
 				</button>
@@ -60,21 +57,21 @@
 			<div class="form-group input-group-sm">
 			    <label class="col-sm-2 control-label text_right"><small>宾馆名称</small></label>
 			    <div class="col-sm-2">
-					<input type="text" class="form-control" name="hotelName" id="hotelName" placeholder="宾馆名称" value="">
+					<input type="text" class="form-control" name="hotelName" id="hotelName" placeholder="宾馆名称" value="${hotelName}">
 				</div>
-		   		<label class="col-sm-1 control-label"><small>创建时间大于</small></label>
+		   		<label class="col-sm-1 control-label"><small>时间大于</small></label>
 				<div class="col-sm-3">
 				   <a class='input-group date' id='datetimepicker1' >
-				        <input type='text' class="form-control" name="createTime" id="createTime" placeholder="创建时间大于" value=""/>
+				        <input type='text' class="form-control" name="startTime" id="startTime" placeholder="创建时间大于" value="${startTime}"/>
 				        <span class="input-group-addon">
 				            <span class="glyphicon glyphicon-calendar"></span>
 				        </span>
 				    </a>
 				</div>
-				<label class="col-sm-1 control-label"><small>创建时间小于</small></label>
+				<label class="col-sm-1 control-label"><small>时间小于</small></label>
 				<div class="col-sm-3">
 				   <a class='input-group date' id='datetimepicker2' >
-				        <input type='text' class="form-control" name="endTime" id="endTime" placeholder="创建时间小于"value=""/>
+				        <input type='text' class="form-control" name="endTime" id="endTime" placeholder="创建时间小于" value="${endTime}"/>
 				        <span class="input-group-addon">
 				            <span class="glyphicon glyphicon-calendar"></span>
 				        </span>
@@ -88,6 +85,12 @@
 		        	<button type="button" class="btn btn-info btn-sm" id="search">
 			        	<span class="glyphicon glyphicon-search"></span>查询
 			        </button>
+			        <button class="btn btn-info btn-sm" type="button" id="print">
+						<span class="glyphicon glyphicon-print"></span>打印
+					</button>
+					<button class="btn btn-info btn-sm" type="button" id="clear">
+						<span class="glyphicon glyphicon-remove-sign"></span>清空
+					</button>
 			     </div>
 			</div>
 		</div>
@@ -108,6 +111,7 @@
 				            <th>枕巾</th>
 				            <th>浴巾</th>
 				            <th>面巾</th>
+				            <th>地巾</th>
 				            <th>浴袍</th>
 				            <th>窗帘</th>
 				            <th>窗纱</th>
@@ -121,18 +125,19 @@
 					<tbody>
 					<#if pageInfo.list??>
 		    		<#list pageInfo.list as good>
-			    		<tr class="font2" onclick="editGoods(${good.id?default('')})" title="编辑">
+			    		<tr class="font2">
 			    			<td>
 			    				<input type="checkbox" class="check_item" name="check" value="${good.id}"></input>
 			    			</td>
 			    			<td>${good.id?default('')}</td>
-			    			<td>${good.hotelName?default('')}</td>
+			    			<td onclick="editGoods(${good.id?default('')})" title="编辑">${good.hotelName?default('')}</td>
 			    			<td>${good.createTimeStr?default('')}</td>
 			    			<td>${good.chuangdanNum!0}</td>
 			    			<td>${good.beizhaoNum!0}</td>
 			    			<td>${good.zhenjinNum!0}</td>
 			    			<td>${good.yujinNum!0}</td>
 			    			<td>${good.mianjinNum!0}</td>
+			    			<td>${good.dijinNum!0}</td>
 			    			<td>${good.yupaoNum!0}</td>
 			    			<td>${good.chuanglianNum!0}</td>
 			    			<td>${good.chuangshaNum!0}</td>
@@ -215,8 +220,24 @@
 	});
 	
 	$("#search").click(function(){
-  		window.location.href = "/list?pn="+${pageInfo.pages} + "&hotelName=" + $("#hotelName").val() + 
-  				"&createTime=" + $("#createTime").val() + "&endTime="  + $("#endTime").val();
+		var hotelName = $("#hotelName").val();
+		var startTime = $("#startTime").val();
+		var endTime = $("#endTime").val();
+  		window.location.href = "/list?pn="+${pageInfo.pages} + "&hotelName=" + hotelName + 
+  				"&startTime=" + startTime + "&endTime="  + endTime;
+	});
+	
+	$("#print").click(function(){
+		var hotelName = $("#hotelName").val();
+		var startTime = $("#startTime").val();
+		var endTime = $("#endTime").val();
+  		window.open("/print?pn="+${pageInfo.pages} + "&hotelName=" + hotelName + "&startTime=" + startTime + "&endTime="  + endTime)
+	});
+	
+	$("#clear").click(function(){
+		var hotelName = $("#hotelName").val("");
+		var startTime = $("#startTime").val("");
+		var endTime = $("#endTime").val("");
 	});
 	
 	function editGoods(id){
@@ -297,11 +318,6 @@
 			e.checked = !e.checked;
 		}
 	}
-  	
-	//打印
-  	function print(){
-  		window.open("/print?pn="+${pageInfo.pages});
-  	}
 	
   	$('#datetimepicker1').datetimepicker({
   		language: "zh-CN",
